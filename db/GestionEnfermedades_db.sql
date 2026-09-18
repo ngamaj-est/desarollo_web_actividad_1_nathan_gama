@@ -17,6 +17,7 @@ CREATE TABLE Usuarios (
     password VARCHAR(255) NOT NULL,
     role VARCHAR(30)  NOT NULL CHECK (role IN ('Administrador','Medico','Usuario'))
 );
+GO
 
 IF OBJECT_ID('dbo.Enfermedades', 'U') IS NOT NULL DROP TABLE dbo.Enfermedades;
 GO
