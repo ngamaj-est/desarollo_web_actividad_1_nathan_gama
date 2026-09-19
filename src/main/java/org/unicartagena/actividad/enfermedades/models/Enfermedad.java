@@ -27,13 +27,13 @@ public class Enfermedad {
     @Column(name = "medicamentos", length = 200, nullable = false)
     private String medicamentos;
 
-    @Column(name = "esContagiosa", nullable = false)
+    @Column(name = "es_contagiosa", nullable = false)
     private boolean esContagiosa;
 
     @Column(name = "esCubiertaPorPos", nullable = false)
     private boolean esCubiertaPorPos;
 
-    @Column(name = "requiereIncapacidad", nullable = false)
+    @Column(name = "requiere_incapacidad", nullable = false)
     private boolean requiereIncapacidad;
 
     public Enfermedad() {}
