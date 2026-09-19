@@ -4,7 +4,7 @@ import org.unicartagena.actividad.enfermedades.enums.NivelGravedadEnum;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Enfermedades")
+@Table(name = "enfermedades")
 public class Enfermedad {
 
     @Id
@@ -14,11 +14,11 @@ public class Enfermedad {
     @Column(name = "nombre", length = 100, nullable = false, unique = true)
     private String nombre;
 
-    @Column(name = "nombreCientifico", length = 100, nullable = false)
+    @Column(name = "nombre_cientifico", length = 100, nullable = false)
     private String nombreCientifico;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "nivelGravedad", length = 20, nullable = false)
+    @Column(name = "nivel_gravedad", length = 20, nullable = false)
     private NivelGravedadEnum nivelGravedad;
 
     @Column(name = "sintomas", length = 500, nullable = false)
@@ -30,7 +30,7 @@ public class Enfermedad {
     @Column(name = "es_contagiosa", nullable = false)
     private boolean esContagiosa;
 
-    @Column(name = "esCubiertaPorPos", nullable = false)
+    @Column(name = "es_cubierta_por_pos", nullable = false)
     private boolean esCubiertaPorPos;
 
     @Column(name = "requiere_incapacidad", nullable = false)

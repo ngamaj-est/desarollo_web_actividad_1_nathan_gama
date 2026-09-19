@@ -4,7 +4,7 @@ import org.unicartagena.actividad.enfermedades.enums.UsuarioEnum;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name ="Usuarios")
+@Table (name ="usuarios")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
