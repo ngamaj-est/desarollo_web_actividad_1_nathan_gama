@@ -48,5 +48,19 @@ public class EnfermedadController {
         if(!auth(session)) return "redirect:/login";
         model.addAttribute("enfermedades", service.reporteGravedad(nivel));
         return "enfermedades/lista";
+        
+
+    }
+    @GetMapping("/buscarEnfermedades")
+    public String buscarPorId(@RequestParam Long id, Model model, HttpSession session) {
+        if(!auth(session)) return "redirect:/login";
+
+        Enfermedades e = service.searchEnfermedades(id);
+        if (e != null) {
+            model.addAttribute("enfermedades", java.util.List.of(e));
+        } else {
+            model.addAttribute("enfermedades", java.util.List.of());
+        }
+        return "enfermedades/lista";
     }
 }

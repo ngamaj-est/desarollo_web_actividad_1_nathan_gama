@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Enfermedades</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .acciones { margin-bottom: 20px; padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; }
+        .btn { padding: 8px 15px; text-decoration: none; background-color: #007bff; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 14px; }
+        .btn:hover { background-color: #0056b3; }
+        .btn-danger { background-color: #dc3545; }
+        .btn-danger:hover { background-color: #c82333; }
+        .form-inline { display: inline-block; margin-right: 20px; }
+        .form-inline input, .form-inline select { padding: 6px; margin-right: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<h2>Listado de Enfermedades</h2>
+
+<div class="acciones">
+    <a th:href="@{/enfermedades/nuevaEnfermedad}" class="btn">➕ Registrar Nueva</a>
+    <a th:href="@{/enfermedades}" class="btn">🔄 Mostrar Todas</a>
+    <a th:href="@{/logout}" class="btn btn-danger" style="float: right;">Cerrar Sesión</a>
+
+    <hr style="margin: 15px 0; border-top: 1px solid #ddd;">
+
+    <form th:action="@{/enfermedades/buscarEnfermedades}" method="get" class="form-inline">
+        <label>Buscar por ID:</label>
+        <input type="number" name="id" required placeholder="Ej: 1">
+        <button type="submit" class="btn">Buscar</button>
+    </form>
+
+    <form th:action="@{/enfermedades/reporte/gravedad}" method="get" class="form-inline">
+        <label>Filtrar por Gravedad:</label>
+        <select name="nivel" required>
+            <option value="" disabled selected>Seleccione...</option>
+            <option th:each="g : ${T(org.unicartagena.actividad.enfermedades.enums.NivelGravedadEnum).values()}"
+                    th:value="${g}" th:text="${g}"></option>
+        </select>
+        <button type="submit" class="btn">Filtrar</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Nombre Científico</th>
+        <th>Gravedad</th>
+        <th>Contagiosa</th>
+        <th>POS</th>
+        <th>Incapacidad</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="enf : ${enfermedades}">
+        <td th:text="${enf.id}"></td>
+        <td th:text="${enf.nombre}"></td>
+        <td th:text="${enf.nombreCientifico}"></td>
+        <td th:text="${enf.nivelGravedad}"></td>
+        <td th:text="${enf.esContagiosa ? 'Sí' : 'No'}"></td>
+        <td th:text="${enf.esCubiertaPorPos ? 'Sí' : 'No'}"></td>
+        <td th:text="${enf.requiereIncapacidad ? 'Sí' : 'No'}"></td>
+        <td>
+            <a th:href="@{/enfermedades/eliminar/{id}(id=${enf.id})}"
+               class="btn btn-danger"
+               onclick="return confirm('¿Estás seguro de eliminar esta enfermedad del sistema?');">🗑️ Eliminar</a>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(enfermedades)}">
+        <td colspan="8" style="text-align: center; padding: 20px; color: #666;">No se encontraron enfermedades registradas con esos criterios.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
