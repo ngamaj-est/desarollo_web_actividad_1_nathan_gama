@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión - Gestión de Enfermedades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px;
+        }
+        h2, h3 { text-align: center; color: #333; margin-top: 0; }
+        h3 { font-size: 16px; color: #666; }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Evita que el input se salga del div */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #5a6268; }
+
+        .alert { padding: 10px; border-radius: 4px; text-align: center; margin-bottom: 15px; font-size: 14px; }
+        .alert-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+
+        hr { margin: 25px 0; border: none; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+
+    <div th:if="${error}" th:text="${error}" class="alert alert-error"></div>
+    <div th:if="${mensaje}" th:text="${mensaje}" class="alert alert-success"></div>
+
+    <form th:action="@{/login}" method="post">
+        <input type="email" name="email" placeholder="Correo electrónico" required/>
+        <input type="password" name="password" placeholder="Clave" required/>
+        <button type="submit">Ingresar</button>
+    </form>
+
+    <hr>
+
+    <h3>¿Olvidaste tu clave?</h3>
+    <form th:action="@{/recuperar}" method="post">
+        <input type="email" name="email" placeholder="Correo registrado" required/>
+        <button type="submit" class="btn-secondary">Recuperar por correo</button>
+    </form>
+</div>
+
+</body>
+</html>

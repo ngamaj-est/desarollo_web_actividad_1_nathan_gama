@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Enfermedad</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 5px; max-width: 500px; }
+        label { display: inline-block; width: 150px; margin-bottom: 10px; font-weight: bold; }
+        input[type="text"], select { width: calc(100% - 160px); padding: 5px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .btn-volver { padding: 8px 15px; text-decoration: none; background-color: #6c757d; color: white; border-radius: 4px; border: none; cursor: pointer; display: inline-block; margin-left: 10px; }
+    </style>
+</head>
+<body>
+<h2>Gestión de Enfermedad</h2>
+
+<form th:action="@{/enfermedades/guardarEnfermedad}" th:object="${enfermedad}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Nombre:</label>
+    <input type="text" th:field="*{nombre}" required /><br/>
+
+    <label>Nombre Científico:</label>
+    <input type="text" th:field="*{nombreCientifico}" required /><br/>
+
+    <label>Gravedad:</label>
+    <select th:field="*{nivelGravedad}" required>
+        <option value="" disabled selected>Seleccione...</option>
+        <option th:each="g : ${T(org.unicartagena.actividad.enfermedades.enums.NivelGravedadEnum).values()}"
+                th:value="${g}" th:text="${g}"></option>
+    </select><br/>
+
+    <label>Síntomas:</label>
+    <input type="text" th:field="*{sintomas}" required /><br/>
+
+    <label>Medicamentos:</label>
+    <input type="text" th:field="*{medicamentos}" required /><br/>
+
+    <label>Contagiosa:</label>
+    <input type="checkbox" th:field="*{esContagiosa}" /><br/><br/>
+
+    <label>Cubierta POS:</label>
+    <input type="checkbox" th:field="*{esCubiertaPorPos}" /><br/><br/>
+
+    <label>Requiere Incapacidad:</label>
+    <input type="checkbox" th:field="*{requiereIncapacidad}" /><br/><br/>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/enfermedades}" class="btn-volver">Cancelar</a>
+</form>
+</body>
+</html>
