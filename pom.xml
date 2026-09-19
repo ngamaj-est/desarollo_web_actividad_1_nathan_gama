@@ -55,7 +55,6 @@
 
     <build>
         <plugins>
-            <!-- Este plugin es obligatorio para empaquetar Spring Boot con su Main-Class -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
