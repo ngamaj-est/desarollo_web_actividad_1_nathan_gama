@@ -39,7 +39,6 @@ public class AuthController {
     public String recuperar(@RequestParam String email, Model model) {
         Users u = usuarioService.searchByEmail(email);
         if (u != null) {
-            mailService.sendPassRecovery(u.getEmail(), u.getPassword());
             model.addAttribute("mensaje", "Correo enviado");
         } else {
             model.addAttribute("error", "Correo no existe");
