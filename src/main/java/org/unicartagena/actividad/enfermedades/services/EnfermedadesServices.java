@@ -1,6 +1,6 @@
 package org.unicartagena.actividad.enfermedades.services;
 
-import org.unicartagena.actividad.enfermedades.models.Enfermedades;
+import org.unicartagena.actividad.enfermedades.models.Enfermedad;
 import org.unicartagena.actividad.enfermedades.repository.EnfermedadesRepository;
 import org.unicartagena.actividad.enfermedades.enums.NivelGravedadEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +9,17 @@ import java.util.List;
 
 @Service
 public class EnfermedadesServices {
-    @Autowired private EnfermedadesRepository EnfermedadesRepo;
+    @Autowired private EnfermedadesRepository EnfermedadRepo;
 
-    public List<Enfermedades> listEnfermedades() { return EnfermedadesRepo.findAll(); }
-    public void saveEnfermedades(Enfermedades e) { EnfermedadesRepo.save(e); }
-    public Enfermedades searchEnfermedades(Long id) { return EnfermedadesRepo.findById(id).orElse(null); }
-    public void deleteEnfermedades(Long id) { EnfermedadesRepo.deleteById(id); }
+    public List<Enfermedad> listEnfermedades() { return EnfermedadRepo.findAll(); }
+    public void saveEnfermedades(Enfermedad e) { EnfermedadRepo.save(e); }
+    public Enfermedad searchEnfermedades(Long id) { return EnfermedadRepo.findById(id).orElse(null); }
+    public void deleteEnfermedades(Long id) { EnfermedadRepo.deleteById(id); }
 
-    public List<Enfermedades> reporteGravedad(NivelGravedadEnum nivel) {
-        return EnfermedadesRepo.findByNivelGravedad(nivel);
+    public List<Enfermedad> reporteGravedad(NivelGravedadEnum nivel) {
+        return EnfermedadRepo.findByNivelGravedad(nivel);
     }
-    public List<Enfermedades> reporteCritico() {
-        return EnfermedadesRepo.findByEsContagiosaTrueAndRequiereIncapacidadTrue();
+    public List<Enfermedad> reporteCritico() {
+        return EnfermedadRepo.findByEsContagiosaTrueAndRequiereIncapacidadTrue();
     }
 }

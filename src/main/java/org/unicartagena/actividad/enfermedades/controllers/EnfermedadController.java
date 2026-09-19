@@ -1,6 +1,6 @@
 package org.unicartagena.actividad.enfermedades.controllers;
 
-import org.unicartagena.actividad.enfermedades.models.Enfermedades;
+import org.unicartagena.actividad.enfermedades.models.Enfermedad;
 import org.unicartagena.actividad.enfermedades.enums.NivelGravedadEnum;
 import org.unicartagena.actividad.enfermedades.services.EnfermedadesServices;
 import jakarta.servlet.http.HttpSession;
@@ -20,18 +20,18 @@ public class EnfermedadController {
     public String listar(Model model, HttpSession session) {
         if(!auth(session)) return "redirect:/login";
         model.addAttribute("enfermedades", service.listEnfermedades());
-        return "enfermedades/lista";
+        return "crudEnfermedades";
     }
 
     @GetMapping("/nuevaEnfermedad")
     public String nuevo(Model model, HttpSession session) {
         if(!auth(session)) return "redirect:/login";
-        model.addAttribute("enfermedad", new Enfermedades());
-        return "enfermedades/formulario";
+        model.addAttribute("enfermedad", new Enfermedad()); // <-- Cambiado a singular
+        return "formularioEnfermedades";
     }
 
     @PostMapping("/guardarEnfermedad")
-    public String guardar(@ModelAttribute Enfermedades e) {
+    public String guardar(@ModelAttribute Enfermedad e) { // <-- Cambiado a singular
         service.saveEnfermedades(e);
         return "redirect:/enfermedades";
     }
@@ -47,20 +47,19 @@ public class EnfermedadController {
     public String reporteGravedad(@RequestParam NivelGravedadEnum nivel, Model model, HttpSession session) {
         if(!auth(session)) return "redirect:/login";
         model.addAttribute("enfermedades", service.reporteGravedad(nivel));
-        return "enfermedades/lista";
-        
-
+        return "crudEnfermedades";
     }
+
     @GetMapping("/buscarEnfermedades")
     public String buscarPorId(@RequestParam Long id, Model model, HttpSession session) {
         if(!auth(session)) return "redirect:/login";
 
-        Enfermedades e = service.searchEnfermedades(id);
+        Enfermedad e = service.searchEnfermedades(id);
         if (e != null) {
             model.addAttribute("enfermedades", java.util.List.of(e));
         } else {
             model.addAttribute("enfermedades", java.util.List.of());
         }
-        return "enfermedades/lista";
+        return "crudEnfermedades";
     }
 }
