@@ -63,9 +63,14 @@ URL pública: https://desarollowebactividad1nathangama-production.up.railway.app
 
    En Linux o macOS usa `./mvnw spring-boot:run`.
 
-4. Abre `http://localhost:8080`. La ruta inicial redirige al formulario de inicio de sesión.
+### Cuentas de demostración
 
-Hibernate está configurado con `ddl-auto=update`. El archivo [db/GestionEnfermedades_db.sql](db/GestionEnfermedades_db.sql) contiene datos de demostración y sentencias `DROP TABLE`; ejecútalo únicamente en una base de datos desechable o después de revisar su contenido. Sus nombres de columnas no coinciden completamente con los nombres explícitos de las entidades JPA, por lo que se debe validar el esquema antes de usar esos datos semilla.
+El script SQL carga estas cuentas iniciales:
+
+| Correo | Contraseña | Rol |
+| --- | --- | --- |
+| `nathan.gama@admin.com` | `admin` | Administrador |
+| `antonio.lopez@medico.com` | `medico123` | Medico |
 
 ## Rutas principales
 
